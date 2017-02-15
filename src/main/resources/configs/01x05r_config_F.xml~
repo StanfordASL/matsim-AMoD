@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v2.dtd">
+<config>
+	<module name="taxi">
+		<param name="taxisFile" value="/home/frossi2/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/amod/amod_vehicles.xml" />
+		
+		<param name="pickupDuration" value="120"/>
+		<param name="dropoffDuration" value="60"/>
+		<param name="vehicleDiversion" value="true" />
+		<param name="onlineVehicleTracker" value="true" />
+		<param name="destinationKnown" value="true" />
+		<param name="timeProfiles" value="true" />
+		<param name="detailedStats" value="true" />
+
+		<parameterset type="optimizer">
+			<param name="type" value="AMoD" />
+			<param name="id" value="AMoD" />
+			<param name="reoptimizationTimeStep" value="300"/>
+			<param name="nearestRequestsLimit" value="99999" />
+			<param name="nearestVehiclesLimit" value="99999" />
+			<param name="cellSize" value="1000" />
+			<param name="optimizerDelay" value="60" />
+			<param name="rebalanceWeight" value="1.00"/>
+			<param name="optimizerDataFile" value="/home/frossi2/SVN/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerdata/March1SourcesSinksNodes.mat" />
+			<param name="timeHorizon" value="1200" />
+			<param name="tripThreshold" value=".35" />
+			<param name="stationMap" value="/home/frossi2/SVN/AMoD_congestion/AMoD_taxi/src/main/resources/station_node_map_ny.mat" />
+			<!--<param name="endTime" value="79200" /> -->
+		</parameterset>
+	</module>
+
+	<module name="network">
+		<param name="inputNetworkFile" value="/home/frossi2/SVN/AMoD_congestion/AMoD_taxi/src/main/resources/nynetwork.xml" />
+	</module>
+
+	<module name="plans">
+		<param name="inputPlansFile" value="/home/frossi2/SVN/AMoD_congestion/AMoD_taxi/src/main/resources/plans/march05plans.xml.gz" />
+	</module>
+
+	<module name="qsim">
+		<param name="simStarttimeInterpretation" value="onlyUseStarttime" />
+		<param name="insertingWaitingVehiclesBeforeDrivingVehicles" value="true" />
+		<param name="snapshotStyle" value="queue" />
+		<param name="startTime" value="00:00:00" />
+
+		<param name="timeStepSize" value="00:00:01" />
+		<!--<param name="endTime" value="21:00:0"/>-->
+	</module>
+	
+	<module name="otfvis">
+		<param name="coloringScheme" value="taxicab" />
+		<param name="drawNonMovingItems" value="false" />
+	</module>
+
+	<module name="controler">
+		<param name="outputDirectory" value="/home/frossi2/SVN/AMoD_congestion/AMoD_taxi/test/output/01x05_pax-reb" />
+		<param name="overwriteFiles" value="deleteDirectoryIfExists" />
+		<param name="firstIteration" value="0" />
+		<param name="lastIteration" value="0" />
+	</module>
+
+	<module name="planCalcScore">
+		<param name="activityType_0" value="dummy" />
+		<param name="activityTypicalDuration_0" value="24:00:00" />
+	</module>
+
+	<module name="strategy">
+		<!-- Either we have only DynAgents, or we want "standard" agents to serve as a background,
+		i.e. not to change their behavior -->
+		<param name="maxAgentPlanMemorySize" value="1" />
+		<param name="ModuleProbability_1" value="1.0" />
+		<param name="Module_1" value="BestScore" />
+	</module>
+</config>
