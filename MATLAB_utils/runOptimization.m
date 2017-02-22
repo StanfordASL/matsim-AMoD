@@ -16,7 +16,7 @@ onlyRebalance = 1;
 % if this flag is turned on, the rebalancing routes are computed using
 % Dijkstra
 % This is now a parameter
-%legacyRebalance = 1; 
+%legacyRebalance = 1;
 
 % If this is turned on, we DO NOT rebalance
 donothingflag = 0;
@@ -49,6 +49,7 @@ Sinks = [];
 
 t = cputime;
 
+% Configure road map below
 LoadRoadGraphNYOSM; % New York
 %load('bin/zhangSeattleData.mat'); % Seattle
 
@@ -94,7 +95,7 @@ if ~onlyRebalance & ~donothingflag
     end
     endind = i;
 
-    if (stationsflag) 
+    if (stationsflag)
         Sources = nodestostations(Sources);
         Sinks = nodestostations(Sinks);
     end
@@ -114,9 +115,9 @@ if ~onlyRebalance & ~donothingflag
     Sources = Sources(1:M);
     Sinks = Sinks(1:M);
     FlowsIn = FlowsIn(1:M);
-    
+
     threshold = threshold*M/sourceSize;
-    
+
     %Timing
     timerOpt=tic;
     timerOptCPU=cputime;
@@ -126,7 +127,7 @@ if ~onlyRebalance & ~donothingflag
     optimizerTimeO=toc(timerOpt);
     optimizerCPUTimeO=cputime-timerOptCPU;
     %/Timing
-    
+
     %compute total number of vehicles
     %for each node, look at how many vehicles are going out
     %sum over all passengers of the indicator variables of the passengers 1 to
@@ -155,37 +156,37 @@ if ~onlyRebalance & ~donothingflag
         [reb_output, numvehicles] = TIMulticommodityFlow_f(RoadGraph, RoadCap, TravelTimes, SourcesReb, SinksReb, SourceFlows, SinkFlows, milpflag, congrexflag, 1);
 
         fprintf('Congestion-aware optimizer requires rebalancing %d vehicles\n',numvehicles)
-        
+
         S=length(SourcesReb);
         M=1;
         %SoRelaxkl=@(k,l) N*N*M + N*N + S*(k-1) + l;
         %SiRelaxkl=@(k,l) N*N*M + N*N + M*S + S*(k-1) + l;
-        
+
         E=0; %Compute number of edges
         for i=1:length(RoadGraph)
             E=E+length(RoadGraph{i});
         end
-        
+
         SoRelaxkl=@(k,l) E*M + E + S*(k-1) + l;
         SiRelaxkl=@(k,l) E*M + E + M*S + S*(k-1) + l;
-        
+
         relFlowIn = SourceFlows - reb_output(SoRelaxkl(1,1):SoRelaxkl(1,S))';
         relFlowOut = SinkFlows - reb_output(SiRelaxkl(1,1):SiRelaxkl(1,S))';
         fprintf('Congestion-aware optimizer requires rebalancing %d vehicles\n',numvehicles)
-        
+
         S=length(SourcesReb);
         M=1;
         %SoRelaxkl=@(k,l) N*N*M + N*N + S*(k-1) + l;
         %SiRelaxkl=@(k,l) N*N*M + N*N + M*S + S*(k-1) + l;
-        
+
         E=0; %Compute number of edges
         for i=1:length(RoadGraph)
             E=E+length(RoadGraph{i});
         end
-        
+
         SoRelaxkl=@(k,l) E*M + E + S*(k-1) + l;
         SiRelaxkl=@(k,l) E*M + E + M*S + S*(k-1) + l;
-        
+
         relFlowIn = SourceFlows - reb_output(SoRelaxkl(1,1):SoRelaxkl(1,S))';
         relFlowOut = SinkFlows - reb_output(SiRelaxkl(1,1):SiRelaxkl(1,S))';
     SinkFlows = SinkFlows';
@@ -193,7 +194,7 @@ if ~onlyRebalance & ~donothingflag
 
     FullRebPaths = cplex_out(N*N*M+1:N*N*(M+1));
     [FracRebSols, FracRebWeights] = TIDecomposeFracRebSol(FullRebPaths, N, M, SourcesReb, SinksReb, SourceFlows, SinkFlows);
-    [Reb_solution] = TISampleRebSol(FracRebSols, FracRebWeights); 
+    [Reb_solution] = TISampleRebSol(FracRebSols, FracRebWeights);
 
     disp('Checkpoint 2');
     [rebpaths,~] = TIRebPathDecomposition(Reb_solution, N, M, SourcesReb, SinksReb, SourceFlows, SinkFlows);
@@ -203,13 +204,13 @@ if ~onlyRebalance & ~donothingflag
     optimizerTimeP=toc(timerPax);
     optimizerCPUTimeP=cputime-timerPaxCPU;
     %/Timing
-    
+
     numvehicles = numvehicles/timeHorizon/threshold;
-    
+
     save('~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpaths.mat', ...
      'passpaths', 'rebpaths', 'numvehicles', 'Sources', 'Sinks');
 elseif ~donothingflag
-    
+
     % TODO: write logic for when only rebalancing
     passpaths = {}; % empty cell will tell route scheduler to use Dijkstra
     [SourcesReb, SourceFlows, SinksReb, SinkFlows] = calcFlowsFromDistribution(threshold);
@@ -226,44 +227,44 @@ elseif ~donothingflag
 %     SourceFlows = SourceFlows(1:M);
 %     SinksReb = SinksReb(1:M);
 %     SinkFlows = SinkFlows(1:M);
-%     
+%
 %     threshold = threshold*M/sourceSize;
-    
+
     if ~legacyRebalance
         %Timing
         timerOpt=tic;
         timerOptCPU=cputime;
         %\Timing
-        
+
         %adjustedRoadCap = adjustRoadCap(RoadCap, currFlows);
         [reb_output, numvehicles] = TIMulticommodityFlow_f_R(RoadGraph, RoadCap, TravelTimes, SourcesReb, SinksReb, SourceFlows, SinkFlows, milpflag, congrexflag, 1);
 
         fprintf('Congestion-aware optimizer requires rebalancing %d vehicles\n',numvehicles)
-        
+
         S_so=length(SourcesReb);
         S_si=length(SinksReb);
         M=1;
         %SoRelaxkl=@(k,l) N*N*M + N*N + S*(k-1) + l;
         %SiRelaxkl=@(k,l) N*N*M + N*N + M*S + S*(k-1) + l;
-        
+
         E=0; %Compute number of edges
         for i=1:length(RoadGraph)
             E=E+length(RoadGraph{i});
         end
-        
+
         SoRelaxkl=@(k,l) E*M + E + S_so*(k-1) + l;
         SiRelaxkl=@(k,l) E*M + E + M*S_so + S_si*(k-1) + l;
-        
-        
-        
+
+
+
         relFlowIn = SourceFlows - reb_output(SoRelaxkl(1,1):SoRelaxkl(1,S_so))';
         relFlowOut = SinkFlows - reb_output(SiRelaxkl(1,1):SiRelaxkl(1,S_si))';
-    
+
         fprintf('Did not rebalance %d in-flows because of congestion\n',sum(reb_output(SoRelaxkl(1,1):SoRelaxkl(1,S_so))))
         fprintf('Did not rebalance %d out-flows because of congestion\n',sum(reb_output(SiRelaxkl(1,1):SiRelaxkl(1,S_si))))
-        
+
         [rebpaths, ~] = TIRebPathDecomposition_f(reb_output, RoadGraph, N, M, SourcesReb, SinksReb, relFlowIn, relFlowOut,1);
-        
+
         testnode=63;
         ccounterso=0;
         fcounterso=0;
@@ -281,7 +282,7 @@ elseif ~donothingflag
                 end
             end
         end
-        
+
         rebpaths2={};
         rp2c=1;
         for iii=1:length(rebpaths)
@@ -291,8 +292,8 @@ elseif ~donothingflag
             end
         end
         rebpaths=rebpaths2;
-                
-        
+
+
         fprintf('%d routes (flow %d) going out of station %d, %d routes (flow %d) going in\n',ccounterso,fcounterso,testnode,ccountersi,fcountersi)
         %Timing
         optimizerTimeO=toc(timerOpt);
@@ -300,10 +301,10 @@ elseif ~donothingflag
         optimizerTimeP=0;
         optimizerCPUTimeP=0;
         %/Timing
-        
+
         rebpaths = rebpaths';
         fprintf('Number of rebalancing sources that are active: %d\n',length(rebpaths))
-        
+
         %numvehicles = length(rebpaths);
         save('~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpaths.mat', ...
      'passpaths', 'rebpaths', 'numvehicles', 'Sources', 'Sinks');
@@ -322,9 +323,9 @@ elseif ~donothingflag
                 Tij(i,j) = norm(dist , 1);
             end
         end
-        
+
         [vexcess, vdesired] = calcLegacyDistribution;
-        
+
         %Timing
         timerOpt=tic;
         timerOptCPU=cputime;
@@ -332,11 +333,11 @@ elseif ~donothingflag
         cvx_begin quiet
             variable numij(numStations, numStations)
             minimize (sum(sum(Tij.*numij)));
-            subject to 
+            subject to
             vexcess + sum((numij' - numij)')' >= vdesired;
             numij >= 0;
         cvx_end
-        
+
         if (sum(sum(isnan(numij))) || ~(strcmp(cvx_status,'Solved') || strcmp(cvx_status,'Suboptimal') || strcmp(cvx_status,'Inaccurate/Solved')))
             disp('ERROR: CVX could not find a solution')
             disp(cvx_status)
@@ -344,16 +345,16 @@ elseif ~donothingflag
             rebpaths={}
             return
         end
-        
+
         %Timing
         optimizerTimeO=toc(timerOpt);
         optimizerCPUTimeO=cputime-timerOptCPU;
         optimizerTimeP=0;
         optimizerCPUTimeP=0;
         %/Timing
-        
+
         % make sure numij is integer
-        numij = round(numij);            
+        numij = round(numij);
         % add rebalancing vehicles to queues
         for i = 1:numStations
             for j = 1:numStations
@@ -362,12 +363,12 @@ elseif ~donothingflag
                 end
             end
         end
-        
-        
-        
+
+
+
         %A = LinkTime > 0; % where there is a link
-        %C = LinkTime; 
-        
+        %C = LinkTime;
+
         %numtrips = 1;
         %for i=1:numStations
         %    destinations = unique(rebalanceQueue{i});
@@ -375,21 +376,21 @@ elseif ~donothingflag
         %    for j = 1:numdests
         %        numtrips = numtrips + 1;
         %    end
-        %end 
-        
+        %end
+
         numtrips=0;
         for i=1:length(rebalanceQueue)
             numtrips=numtrips+length(rebalanceQueue{i});
         end
-        
+
         for i=1:size(rebalanceQueue) % make the componenets column-wise
             rebalanceQueue{i} = rebalanceQueue{i}';
         end
-        
+
         numvehicles = numtrips;
-        
+
         fprintf('Number of trips: %d\n',numtrips)
-        
+
         % real path: '~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpairs.mat'
         save('~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpairs.mat', ...
             'rebalanceQueue', 'numvehicles');
@@ -403,12 +404,12 @@ elseif donothingflag
     Sinks=[];
     numStations = length(stationstonodes);
     rebalanceQueue = cell(numStations,1);
-    
+
     optimizerTimeO=0;
     optimizerCPUTimeO=0;
     optimizerTimeP=0;
     optimizerCPUTimeP=0;
-    
+
     save('~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpaths.mat', ...
      'passpaths', 'rebpaths', 'numvehicles', 'Sources', 'Sinks');
     save('~/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/optimizerpairs.mat', ...
@@ -448,7 +449,7 @@ optimizerCPUTimeAll=cputime-timerAllCPU;
  %/Timing
 
 
- 
+
 disp('Done!');
 disp(size(rebpaths));
 end

@@ -21,4 +21,4 @@ The User Guide in the root folder provides a more detailed introduction to the m
 
 [2] Zhang R*, Rossi F*, Pavone M (2016) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](http://www.roboticsproceedings.org/rss12/p32.html)*. In Robotics: Science and Systems. Ann Arbor, MI, July, 2016.
 
-[3] Rossi F, Zhang R, Hindy Y, Pavone M (2017) *Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms*. Submitted to Autonomous Robots.
+[3] Rossi F, Zhang R, Hindy Y, Pavone M (2017) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](https://web.stanford.edu/~frossi2/pdf/Rossi.Zhang.Hindy.Pavone.AURO17.pdf)*. Submitted to Autonomous Robots.
