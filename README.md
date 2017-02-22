@@ -9,7 +9,7 @@ Prepare a configuration file to specify the problem parameters. Sample configura
 
 Specify the location of the configuration file in `src/main/java/RunAMoDExample.java` .
 
-Configure the location of the road map in the MATLAB optimizer by editing the file `MATLAB_utils/runOptimization.m` (line ~52). A sample road map of New York City is provided in `LoadRoadGraphNYOSM.m` . Note that the capacity of the roads in `LoadRoadGraphNYOSM` do not necessarily match the capacity of the roads in the MATSim configuration file (which are reduced to account for exogenous traffic). To ensure that MATLAB and MATSim employ the same road capacities, edit line 89 in `LoadRoadGraphNYOSM.m`.
+Configure the location of the road map in the MATLAB optimizer by editing the file `MATLAB_utils/runOptimization.m` (line ~52). A sample road map of New York City is provided in `LoadRoadGraphNYOSM.m` . Note that the capacity of the roads in `LoadRoadGraphNYOSM` do not necessarily match the capacity of the roads in the MATSim configuration file (which are reduced to account for exogenous traffic). To ensure that MATLAB and MATSim employ the same road capacities, edit line ~89 in `LoadRoadGraphNYOSM.m`.
 
 Ensure that 1. the road maps used by MATLAB and by MATSim are identical (see the User Guide for details on how to generate a MATSim road map from MATLAB data) and 2. the path of the optimization output in MATLAB is correctly specified in the configuration file.
 
