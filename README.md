@@ -1,5 +1,5 @@
 # matsim-AMoD
-A fork of MATSIM's DVRP module [0] to rebalancing of self-driving vehicles in an Autonomous Mobility on Demand (AMoD) framework. Implements the rebalancing algorithms presented in [1] and [2]. The framework was used for simulations in [3].
+A fork of MATSIM's DVRP module [0] for rebalancing of self-driving vehicles in an Autonomous Mobility on Demand (AMoD) framework. Implements the rebalancing algorithms presented in [1] and [2]. The framework was used for simulations in [3].
 ## Requirements
 JRE (for MATSim), MATLAB (for the rebalancing algorithms in [1] and [2]), a MATLAB LP solver. The current LP solver is IBM ILOG CPLEX: a different LP solver (e.g. Gurobi or MATLAB's `linprog`) can be used by modifying the file `run_optimization.m` in `MATLAB_utils`.
 
@@ -15,6 +15,8 @@ Ensure that 1. the road maps used by MATLAB and by MATSim are identical (see the
 Run `src/main/java/RunAMoDExample.java` to start the simulation.
 
 The User Guide in the root folder provides a more detailed introduction to the matsim-AMoD package.
+
+## References
 
 [0] M. Maciejewski, J. Bischoff, S. Hörl, K. Nagel (2017) *[Towards a testbed for dynamic vehicle routing algorithms](https://svn.vsp.tu-berlin.de/repos/public-svn/publications/vspwp/2017/17-06/)*; submitted to PAAMS-TAAPT.
 
