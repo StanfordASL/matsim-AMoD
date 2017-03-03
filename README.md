@@ -23,4 +23,4 @@ The User Guide in the root folder provides a more detailed introduction to the m
 
 [3] Rossi F, Zhang R, Hindy Y, Pavone M (2017) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](https://web.stanford.edu/~frossi2/pdf/Rossi.Zhang.Hindy.Pavone.AURO17.pdf)*. Submitted to Autonomous Robots.
 
-[4] M. Maciejewski, J. Bischoff, S. Hörl, K. Nagel; *[Towards a testbed for dynamic vehicle routing algorithms](https://svn.vsp.tu-berlin.de/repos/public-svn/publications/vspwp/2017/17-06/)*; submitted to PAAMS-TAAPT
+[4] M. Maciejewski, J. Bischoff, S. Hörl, K. Nagel (2017) *[Towards a testbed for dynamic vehicle routing algorithms](https://svn.vsp.tu-berlin.de/repos/public-svn/publications/vspwp/2017/17-06/)*; submitted to PAAMS-TAAPT.
