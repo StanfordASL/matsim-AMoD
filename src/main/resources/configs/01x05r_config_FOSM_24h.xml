@@ -34,7 +34,7 @@
 	</module>
 
 	<module name="network">
-		<param name="inputNetworkFile" value="/home/frossi2/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/NYOSMnetwork_22p5cap.xml" />
+		<param name="inputNetworkFile" value="/home/frossi2/SVN/code/AMoD_congestion/AMoD_taxi/src/main/resources/maps/NYOSMnetwork_22p5cap.xml" />
 	</module>
 
 	<module name="plans">
