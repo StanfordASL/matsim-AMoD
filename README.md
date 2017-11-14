@@ -1,3 +1,6 @@
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1048415.svg)](https://doi.org/10.5281/zenodo.1048415)
+
 # matsim-AMoD
 A fork of MATSIM's DVRP module [1] for rebalancing of self-driving vehicles in an Autonomous Mobility on Demand (AMoD) framework. Implements the rebalancing algorithms presented in [2] and [3]. The framework was used for simulations in [4].
 ## Requirements
