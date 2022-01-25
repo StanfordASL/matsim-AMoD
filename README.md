@@ -3,6 +3,11 @@
 
 # matsim-AMoD
 A fork of MATSIM's DVRP module [1] for rebalancing of self-driving vehicles in an Autonomous Mobility on Demand (AMoD) framework. Implements the rebalancing algorithms presented in [2] and [3]. The framework was used for simulations in [4].
+
+## Citing this work
+
+F. Rossi, R. Zhang, Y. Hindy, and M. Pavone, “Routing Autonomous Vehicles in Congested Transportation Networks: Structural Properties and Coordination Algorithms,” Autonomous Robots, vol. 42, no. 7, pp. 1427–1442, 2018.
+
 ## Requirements
 JRE (for MATSim), MATLAB (for the rebalancing algorithms in [2] and [3]), a MATLAB LP solver. The current LP solver is IBM ILOG CPLEX: a different LP solver (e.g. Gurobi or MATLAB's `linprog`) can be used by modifying the file `run_optimization.m` in `MATLAB_utils`.
 
@@ -27,4 +32,4 @@ The User Guide in the root folder provides a more detailed introduction to the m
 
 [3] Zhang R*, Rossi F*, Pavone M (2016) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](http://www.roboticsproceedings.org/rss12/p32.html)*. In Robotics: Science and Systems. Ann Arbor, MI, July, 2016.
 
-[4] Rossi F, Zhang R, Hindy Y, Pavone M (2017) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](https://web.stanford.edu/~frossi2/pdf/Rossi.Zhang.Hindy.Pavone.AURO17.pdf)*. Submitted to Autonomous Robots.
+[4] Rossi F, Zhang R, Hindy Y, Pavone M (2017) *[Routing Autonomous Vehicles in congested transportation networks: structural properties and coordination algorithms](https://web.stanford.edu/~frossi2/pdf/Rossi.Zhang.Hindy.Pavone.AURO17.pdf)*.  Autonomous Robots, vol. 42, no. 7, pp. 1427–1442.
