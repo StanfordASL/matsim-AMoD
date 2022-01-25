@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Rossi"
+  given-names: "Federico"
+  orcid: "https://orcid.org/0000-0002-8091-881X"
+- family-names: "Zhang"
+  given-names: "Rick"
+  orcid: "https://orcid.org/0000-0002-6148-0517"
+- family-names: "Hindy"
+  given-names: "Yousef"
+- family-names: "Pavone"
+  given-names: "Marco"
+  orcid: "https://orcid.org/0000-0002-0206-4337"
+title: "Routing Autonomous Vehicles in Congested Transportation Networks: Structural Properties and Coordination Algorithms"
+version: 2.0
+doi: 10.5281/zenodo.1048415
+date-released: 2017-11-13
+url: "https://github.com/StanfordASL/matsim-AMoD"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Rossi"
+    given-names: "Federico"
+    orcid: "https://orcid.org/0000-0002-8091-881X"
+  - family-names: "Zhang"
+    given-names: "Rick"
+    orcid: "https://orcid.org/0000-0002-6148-0517"
+  - family-names: "Hindy"
+    given-names: "Yousef"
+  - family-names: "Pavone"
+    given-names: "Marco"
+    orcid: "https://orcid.org/0000-0002-0206-4337"
+  doi: "10.1007/s10514-018-9750-5"
+  journal: "Autonomous Robots"
+  start: 1427 # First page number
+  end: 1442 # Last page number
+  title: "Routing Autonomous Vehicles in Congested Transportation Networks: Structural Properties and Coordination Algorithms"
+  issue: 7
+  volume: 42
+  year: 2018
